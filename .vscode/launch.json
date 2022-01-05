@@ -1,0 +1,24 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Spring Boot-D11Application<d11>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "console": "internalConsole",
+            "mainClass": "ssf.d11.D11Application",
+            "projectName": "d11",
+            "args": ""
+        },
+        {
+            "type": "java",
+            "name": "Spring Boot-D11<d11>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "console": "internalConsole",
+            "mainClass": "ssf.d11.D11",
+            "projectName": "d11",
+            "args": ""
+        }
+    ]
+}
