@@ -17,7 +17,7 @@
     <div th:if="${#lists.isEmpty(randomNumbers)}"></div>
     <div th:unless="${#lists.isEmpty(randomNumbers)}">
         <ul th:each="number : ${randomNumbers}">
-            <li th:text="${number}"></li>
+            <img th:src="@{${'/images/' + number + '.png'}}" width=64 height=80 alt="${number}" />
         </ul>
     </div>
 </body>
