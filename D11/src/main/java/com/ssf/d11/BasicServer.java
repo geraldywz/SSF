@@ -23,8 +23,7 @@ public class BasicServer {
 		app.setDefaultProperties(Collections.singletonMap("server.port", port));
 		System.out.printf("Application started on port\n", port);
 		// System.out.printf(arg0, arg1);
-		app.run(args);
-		// Test
+		app.run(args);		
 	}
 
 }
