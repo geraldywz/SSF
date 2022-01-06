@@ -1,4 +1,4 @@
-package tfip.ssf.d12;
+package tfip.ssf.d12.controller;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -9,6 +9,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import tfip.ssf.d12.model.Item;
 
 @Controller
 @RequestMapping(path = { "/cart" })

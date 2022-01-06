@@ -1,4 +1,4 @@
-package tfip.ssf.d12;
+package tfip.ssf.d12.controller;
 
 import java.util.Calendar;
 import java.util.Date;

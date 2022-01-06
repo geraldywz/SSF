@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sotong Game</title>
+</head>
+
+<body>
+    <form action="#" th:action="@{/generate}" th:object="${generate}" method="post">
+        <h1><label for="question">How many numbers do you wish to generate?</label></h1><br>
+        <input type="text" id="number" name="number" value="1">
+        <input type="submit" value="Generate">
+    </form>
+</body>
+
+</html>
