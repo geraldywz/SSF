@@ -1,4 +1,4 @@
-package tfip.ssf.d12;
+package ssf.d12;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

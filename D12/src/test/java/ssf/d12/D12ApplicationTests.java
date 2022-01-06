@@ -1,4 +1,4 @@
-package tfip.ssf.d12;
+package ssf.d12;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

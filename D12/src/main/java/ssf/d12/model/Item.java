@@ -1,4 +1,4 @@
-package tfip.ssf.d12.model;
+package ssf.d12.model;
 
 public class Item {
     private String itemName;

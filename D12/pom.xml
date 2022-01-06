@@ -8,7 +8,7 @@
 		<version>2.6.2</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>tfip.ssf</groupId>
+	<groupId>ssf</groupId>
 	<artifactId>d12</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>d12</name>
