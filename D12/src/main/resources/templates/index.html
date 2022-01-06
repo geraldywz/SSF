@@ -11,6 +11,8 @@
 <body>
     <h1>
         The current time is <span data-th-text="${currTime}"></span>
+        <div data-th-if="${currHour le 12}">Good Morning</div>
+        <div data-th-unless="${currHour le 12}">Good Afternoon</div>
     </h1>
 </body>
 
