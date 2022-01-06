@@ -1,6 +1,8 @@
 package tfip.ssf.d12;
 
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.stereotype.Controller;
@@ -14,8 +16,15 @@ public class CartController {
 
     @GetMapping(produces = { "text/html" })
     public String getCart(Model model) {
+        setDate(model);
         model.addAttribute("cart", getShoppingCart());
         return "cart";
+    }
+
+    private void setDate(Model model) {
+        Calendar cal = Calendar.getInstance();
+        model.addAttribute("currTime", (new Date()).toString());
+        model.addAttribute("currHour", cal.get(Calendar.HOUR_OF_DAY));
     }
 
     private List<Item> getShoppingCart() {

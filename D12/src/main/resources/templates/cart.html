@@ -9,6 +9,11 @@
 </head>
 
 <body>
+    <h1>
+        The current time is <span data-th-text="${currTime}"></span>
+        <div th:if="${currHour le 12}">Good Morning</div>
+        <div th:unless="${currHour le 12}">Good Afternoon</div>
+    </h1>
     <table>
         <thead>
             <tr>
