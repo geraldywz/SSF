@@ -1,4 +1,4 @@
-package com.ssf.d11;
+package ssf.d11;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.DefaultApplicationArguments;

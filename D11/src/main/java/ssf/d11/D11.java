@@ -1,4 +1,4 @@
-package com.ssf.d11;
+package ssf.d11;
 
 import java.util.Collections;
 
@@ -8,10 +8,10 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class BasicServer {
+public class D11 {
 
 	public static void main(String[] args) {
-		SpringApplication.run(BasicServer.class, args);
+		SpringApplication.run(D11.class, args);
 
 		// SpringApplication app = new SpringApplication(BasicServer.class);
 
