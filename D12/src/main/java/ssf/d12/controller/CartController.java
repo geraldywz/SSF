@@ -39,5 +39,4 @@ public class CartController {
         cart.add(new Item("Detergent", 1));
         return cart;
     }
-
 }

@@ -10,8 +10,13 @@
 
 <body>
     <form action="#" th:action="@{/generate}" th:object="${generate}" method="post">
-        <h1><label for="question">How many numbers do you wish to generate?</label></h1><br>
-        <input type="number" th:field="*{value}" value="1" min="1" max="10">
+        <h1 th:if="${#lists.isEmpty(randomNumbers)}">How many numbers do you wish to generate?</h1>
+        <h1 th:unless="${#lists.isEmpty(randomNumbers)}">You've generated <span th:text="${#lists.size(randomNumbers)}"></span>
+            <span th:if="${#lists.size(randomNumbers)} == 1">number.</span>
+            <span th:if="${#lists.size(randomNumbers)} > 1">numbers.</span>
+        </h1>
+        <br>
+        <input type="number" th:field="*{value}" min="1" max="10">
         <input type="submit" value="Generate">
     </form>
     <div th:if="${#lists.isEmpty(randomNumbers)}"></div>

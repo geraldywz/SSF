@@ -2,13 +2,17 @@ package ssf.d12.model;
 
 public class Generate {
 
-    private int value;
+    private Integer value;
 
-    public int getValue() {
+    public Generate(){
+        this.value = Integer.valueOf(1);
+    }
+
+    public Integer getValue() {
         return this.value;
     }
 
     public void setValue(int value) {
-        this.value = value;
+        this.value = Integer.valueOf(value);
     }
 }
