@@ -13,7 +13,7 @@ public class Main {
         if (Butler.checkDataDir(args)) {
             springApp.run(args);
         } else {
-            Butler.log("Terminating Process.");
+            Butler.warn("Terminating Process.");
             System.exit(1);
         }
     }

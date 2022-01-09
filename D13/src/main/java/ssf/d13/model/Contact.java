@@ -1,7 +1,6 @@
 package ssf.d13.model;
 
-import java.util.HexFormat;
-import java.util.Random;
+import ssf.d13.util.Contacts;
 
 public class Contact {
     private String name;
@@ -13,11 +12,11 @@ public class Contact {
         this.name = name;
         this.email = email;
         this.phoneNumber = phoneNumber;
-        this.id = generateId();
+        this.id = Contacts.generateId();
     }
 
     public Contact() {
-        this.id = generateId();
+        this.id = Contacts.generateId();
     }
 
     public String getName() {
@@ -50,12 +49,5 @@ public class Contact {
 
     public void setPhoneNumber(int phoneNumber) {
         this.phoneNumber = Integer.valueOf(phoneNumber);
-    }
-
-    public static String generateId() {
-        Random random = new Random();
-        HexFormat hex = HexFormat.of();
-        hex = hex.withUpperCase();
-        return hex.toHexDigits(random.nextInt());
     }
 }
