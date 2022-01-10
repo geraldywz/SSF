@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import ssf.d13.model.Contact;
+import ssf.d13.util.Butler;
 import ssf.d13.util.Contacts;
 
 @Controller
@@ -14,16 +15,22 @@ public class ContactController {
 
     @GetMapping("/contact")
     public String contactForm(Model model) {
-        model.addAttribute("contact", Contacts.generateContact());
+        Contact newContact = Contacts.generateContact();
+        Butler.log("GET",newContact.getId());
+        model.addAttribute("contact", newContact);
         model.addAttribute("addressBook", Contacts.getAddressBook().get());
+        
         return "contact";
     }
 
     @PostMapping("/contact")
-    public String greetingSubmit(@ModelAttribute Contact contact, Model model) {        
-        model.addAttribute("contact", Contacts.generateContact());
-        model.addAttribute("addressBook", Contacts.getAddressBook().get());
+    public String greetingSubmit(@ModelAttribute Contact contact, Model model) {
+        Butler.log("POST Args",contact.getId());
         Contacts.saveContact(contact);
+        Contact newContact = Contacts.generateContact();
+        Butler.log("POST",newContact.getId());
+        model.addAttribute("contact", newContact);
+        model.addAttribute("addressBook", Contacts.getAddressBook().get());
         return "contact";
     }
 }

@@ -11,8 +11,7 @@
 <body>
     <h1>Contact form</h1>
     <form action="#" th:action="@{/contact}" th:object="${contact}" method="post">
-        <label>ID</label><br>
-        <input type="text" th:field="*{id}" disabled><br>
+        <input type="hidden" th:field="*{id}">
         <label>Name</label><br>
         <input type="text" th:field="*{name}"><br>
         <label>Email</label><br>
@@ -21,7 +20,7 @@
         <input type="number" th:field="*{phoneNumber}"><br>
         <input type="submit" value="Submit">
     </form>
-    <div th:if="${#lists.isEmpty(addressBook)}"></div>
+    <!-- <div th:if="${#lists.isEmpty(addressBook)}"></div> -->
     <div th:unless="${#lists.isEmpty(addressBook)}">
         <table>
             <tr th:each="contact : ${addressBook}" th:style="${contactStat.odd}? 'background-color: lightgray;':'background-color: lightblue;'">

@@ -49,11 +49,33 @@ public final class Contacts {
     public static String generateId() {
         Random random = new Random();
         HexFormat hex = HexFormat.of().withUpperCase();
-        return hex.toHexDigits(random.nextInt());
+        String newID = hex.toHexDigits(random.nextInt());
+        while (checkDuplicateID(newID)) {
+            newID = hex.toHexDigits(random.nextInt());
+        }
+        return newID;
     }
 
     public static Contact generateContact() {
-        return new Contact(generateName(), generateEmail(), generatePhoneNumber());
+        return new Contact(generateId(), generateName(), generateEmail(), generatePhoneNumber());
+    }
+
+    private static boolean checkDuplicateID(String ID) {
+        boolean duplicateFound = false;
+        Path path = Paths.get(Butler.getDataDir());
+        File dir = path.toFile();
+        String[] jsonFiles = dir.list((d, s) -> {
+            return s.endsWith(Butler.getJSONExt());            
+        });
+        for (String fileName : jsonFiles) {
+            fileName = fileName.replace(Butler.getJSONExt(), "");
+            // Butler.log(fileName);
+            if (ID.equals(fileName)) {
+                duplicateFound = true;
+                break;
+            }
+        }
+        return duplicateFound;
     }
 
     private static String generateName() {
@@ -81,51 +103,4 @@ public final class Contacts {
                 .toString();
         return generatedString;
     }
-    // public void saveContact(Contact contact, Model model, ApplicationArguments
-    // applicationArguments) {
-    // String dataFilename = contact.getId();
-    // Set<String> optnames = applicationArguments.getOptionNames();
-    // String[] optnamesArr = optnames.toArray(new String[optnames.size()]);
-    // List<String> optValues =
-    // applicationArguments.getOptionValues(optnamesArr[0]);
-    // String[] optValuesArr = optValues.toArray(new String[optValues.size()]);
-    // PrintWriter printWriter = null;
-    // try {
-    // FileWriter fileWriter = new FileWriter(optValuesArr[0] + "/" + dataFilename,
-    // Charset.forName("utf-8"));
-    // printWriter = new PrintWriter(fileWriter);
-    // printWriter.println(contact.getName());
-    // printWriter.println(contact.getEmail());
-    // printWriter.println(contact.getPhoneNumber());
-    // } catch (IOException e) {
-    // logger.error(e.getMessage());
-    // } finally {
-    // printWriter.close();
-    // }
-
-    // model.addAttribute("contact", new Contact(contact.getName(),
-    // contact.getEmail(),
-    // contact.getPhoneNumber()));
-    // }
-
-    // public void getContactById(Model model, String contactId,
-    // ApplicationArguments applicationArguments) {
-    // Set<String> optnames = applicationArguments.getOptionNames();
-    // String[] optnamesArr = optnames.toArray(new String[optnames.size()]);
-    // List<String> optValues =
-    // applicationArguments.getOptionValues(optnamesArr[0]);
-    // String[] optValuesArr = optValues.toArray(new String[optValues.size()]);
-    // Contact cResp = new Contact();
-    // try {
-    // Path filePath = new File(optValuesArr[0] + '/' + contactId).toPath();
-    // Charset charset = Charset.forName("utf-8");
-    // List<String> stringList = Files.readAllLines(filePath, charset);
-    // cResp.setName(stringList.get(0));
-    // cResp.setEmail(stringList.get(1));
-    // cResp.setPhoneNumber(Integer.parseInt(stringList.get(2)));
-    // } catch (IOException e) {
-    // logger.error(e.getMessage());
-    // }
-    // model.addAttribute("contact", cResp);
-    // }
 }

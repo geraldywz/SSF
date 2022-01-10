@@ -1,23 +1,19 @@
 package ssf.d13.model;
 
-import ssf.d13.util.Contacts;
-
 public class Contact {
     private String name;
     private String email;
     private String id;
     private Integer phoneNumber;
 
-    public Contact(String name, String email, Integer phoneNumber) {
+    public Contact(String id, String name, String email, Integer phoneNumber) {
         this.name = name;
         this.email = email;
         this.phoneNumber = phoneNumber;
-        this.id = Contacts.generateId();
+        this.id = id;
     }
 
-    public Contact() {
-        this.id = Contacts.generateId();
-    }
+    public Contact() {}
 
     public String getName() {
         return this.name;
