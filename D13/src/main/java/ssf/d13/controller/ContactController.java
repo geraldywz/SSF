@@ -15,9 +15,7 @@ public class ContactController {
 
     @GetMapping("/contact")
     public String contactForm(Model model) {
-        Contact newContact = Contacts.generateContact();
-        Butler.log("GET",newContact.getId());
-        model.addAttribute("contact", newContact);
+        model.addAttribute("contact", Contacts.generateContact());
         model.addAttribute("addressBook", Contacts.getAddressBook().get());
         
         return "contact";
@@ -25,11 +23,8 @@ public class ContactController {
 
     @PostMapping("/contact")
     public String greetingSubmit(@ModelAttribute Contact contact, Model model) {
-        Butler.log("POST Args",contact.getId());
         Contacts.saveContact(contact);
-        Contact newContact = Contacts.generateContact();
-        Butler.log("POST",newContact.getId());
-        model.addAttribute("contact", newContact);
+        model.addAttribute("contact", Contacts.generateContact());
         model.addAttribute("addressBook", Contacts.getAddressBook().get());
         return "contact";
     }

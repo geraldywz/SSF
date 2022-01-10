@@ -46,7 +46,7 @@ public final class Contacts {
         return Optional.of(addressBook);
     }
 
-    public static String generateId() {
+    public static synchronized String generateId() {
         Random random = new Random();
         HexFormat hex = HexFormat.of().withUpperCase();
         String newID = hex.toHexDigits(random.nextInt());
