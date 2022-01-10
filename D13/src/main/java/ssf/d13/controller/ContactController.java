@@ -15,12 +15,15 @@ public class ContactController {
     @GetMapping("/contact")
     public String contactForm(Model model) {
         model.addAttribute("contact", Contacts.generateContact());
+        model.addAttribute("addressBook", Contacts.getAddressBook().get());
         return "contact";
     }
 
     @PostMapping("/contact")
-    public String greetingSubmit(@ModelAttribute Contact contact, Model model) {
-        // model.addAttribute("randomNumbers", ));
-        return "generate";
+    public String greetingSubmit(@ModelAttribute Contact contact, Model model) {        
+        model.addAttribute("contact", Contacts.generateContact());
+        model.addAttribute("addressBook", Contacts.getAddressBook().get());
+        Contacts.saveContact(contact);
+        return "contact";
     }
 }

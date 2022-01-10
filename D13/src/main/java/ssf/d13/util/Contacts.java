@@ -2,29 +2,48 @@ package ssf.d13.util;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.HexFormat;
+import java.util.List;
+import java.util.Optional;
 import java.util.Random;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import ssf.d13.model.Contact;
 
-public class Contacts {
+public final class Contacts {
 
     public static void saveContact(Contact contact) {
         try {
             ObjectMapper objectMapper = new ObjectMapper();
-            String dataDir = Butler.getDataDir();
-            if (dataDir.charAt(dataDir.length() - 1) != '/') {
-                dataDir = dataDir + "/";
-            }
-            String savePath = dataDir + contact.getId() + ".json";
-
+            String savePath = Butler.getDataDir() + contact.getId() + Butler.getJSONExt();
             Butler.log("Writing", savePath);
             objectMapper.writeValue(new File(savePath), contact);
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public static Optional<List<Contact>> getAddressBook() {
+        List<Contact> addressBook = new ArrayList<>();
+        Path path = Paths.get(Butler.getDataDir());
+        File dir = path.toFile();
+        String[] jsonFiles = dir.list((d, s) -> {
+            return s.toLowerCase().endsWith(Butler.getJSONExt());
+        });
+        ObjectMapper objectMapper = new ObjectMapper();
+        try {
+            for (String file : jsonFiles) {
+                Contact contact = objectMapper.readValue(new File(Butler.getDataDir() + file), Contact.class);
+                addressBook.add(contact);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return Optional.of(addressBook);
     }
 
     public static String generateId() {

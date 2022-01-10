@@ -10,11 +10,12 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.DefaultApplicationArguments;
 
-public class Butler {
+public final class Butler {
 
     private static final String OPTION_DATA_DIR = "dataDir";
     private static final String LOG_DELINEATOR = " >>>>> ";
     private static final List<Path> DOC_ROOT = new ArrayList<>();
+    private static final String JSON_EXT = ".json";
 
     private static final Logger logger = LoggerFactory.getLogger(Butler.class);
 
@@ -33,7 +34,7 @@ public class Butler {
     public static boolean checkDataDir(String[] args) {
         boolean dataDirExists = false;
         DefaultApplicationArguments appArgs = new DefaultApplicationArguments(args);
-        
+
         for (String arg : args) {
             log("Arg", arg);
         }
@@ -77,7 +78,15 @@ public class Butler {
         return dataDirExists;
     }
 
-    public static String getDataDir(){
-        return DOC_ROOT.get(0).toString();
+    public static String getDataDir() {
+        String dataDir = DOC_ROOT.get(0).toString();
+        if (dataDir.charAt(dataDir.length() - 1) != '/') {
+            dataDir = dataDir + "/";
+        }
+        return dataDir;
+    }
+
+    public static String getJSONExt() {
+        return JSON_EXT;
     }
 }
