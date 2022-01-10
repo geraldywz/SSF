@@ -76,4 +76,8 @@ public class Butler {
         }
         return dataDirExists;
     }
+
+    public static String getDataDir(){
+        return DOC_ROOT.get(0).toString();
+    }
 }
