@@ -13,7 +13,7 @@ import ssf.library.model.Author;
 @Service
 public class LibraryRepo {
 
-    private static final String CONTACT_ENTITY = "addressBook";
+    private static final String CONTACT_ENTITY = "library";
 
     @Autowired
     RedisTemplate<String, Object> redisTemplate;
@@ -41,5 +41,4 @@ public class LibraryRepo {
                 .toList();
         return Optional.of(addressBook);
     }
-
 }
