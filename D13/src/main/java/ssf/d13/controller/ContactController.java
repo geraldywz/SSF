@@ -7,7 +7,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import ssf.d13.model.Contact;
-import ssf.d13.util.Butler;
 import ssf.d13.util.Contacts;
 
 @Controller
@@ -17,7 +16,6 @@ public class ContactController {
     public String contactForm(Model model) {
         model.addAttribute("contact", Contacts.generateContact());
         model.addAttribute("addressBook", Contacts.getAddressBook().get());
-        
         return "contact";
     }
 

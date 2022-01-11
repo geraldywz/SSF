@@ -1,6 +1,9 @@
 package ssf.d13.model;
 
-public class Contact {
+import java.io.Serializable;
+
+public class Contact implements Serializable {
+    private static final long serialVersionUID = -7817224776021728682L;
     private String name;
     private String email;
     private String id;
@@ -13,7 +16,8 @@ public class Contact {
         this.id = id;
     }
 
-    public Contact() {}
+    public Contact() {
+    }
 
     public String getName() {
         return this.name;
