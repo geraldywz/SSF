@@ -17,6 +17,9 @@
         <input type="submit" value="Add">
     </form>
     <br>
+    <div th:if="${#lists.isEmpty(todoList)}">
+        You do not have any task.
+    </div>
     <div th:unless="${#lists.isEmpty(todoList)}">
         <ol>
             <span th:each="todo : ${todoList}">

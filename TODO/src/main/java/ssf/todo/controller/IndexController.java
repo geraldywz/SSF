@@ -1,6 +1,7 @@
 package ssf.todo.controller;
 
-import java.io.Console;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,6 +17,8 @@ import ssf.todo.util.TodoList;
 @RequestMapping(path = { "/", "task", "/index.html" })
 public class IndexController {
 
+    private final Logger logger = Logger.getLogger(IndexController.class.getName());
+
     @GetMapping(produces = { "text/html" })
     public String index(Model model) {
         model.addAttribute("todoList", TodoList.getAll());
@@ -26,6 +29,7 @@ public class IndexController {
     @PostMapping(produces = { "text/html" })
     public String addTask(@ModelAttribute Todo todo, Model model) {
         TodoList.addTodo(todo);
+        logger.log(Level.INFO, "Task >>>>> "+todo.getTask());
         model.addAttribute("todoList", TodoList.getAll());
         model.addAttribute("todo", TodoList.generateTodo());
         return "index";
