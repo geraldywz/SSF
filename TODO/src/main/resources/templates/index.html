@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nil Sine Labore</title>
+</head>
+
+<body>
+    <h1>ToDo List</h1>
+    <form action="#" th:action="@{/}" th:object="${todo}" method="post">
+
+        <label>Task</label>
+        <input type="text" th:field="*{task}">
+        <input type="submit" value="Add">
+    </form>
+    <br>
+    <div th:unless="${#lists.isEmpty(todoList)}">
+        <ol>
+            <span th:each="todo : ${todoList}">
+                <li th:text="${todo.task}"></li>
+            </span>
+        </ol>
+    </div>
+</body>
+
+</html>
