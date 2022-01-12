@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.Objects;
 
 public class Todo implements Serializable{
+    private static final long serialVersionUID = -7817224776021728682L;
     private String task;
 
     public Todo() {

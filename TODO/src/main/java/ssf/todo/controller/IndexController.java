@@ -11,27 +11,27 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import ssf.todo.model.Todo;
-import ssf.todo.util.TodoList;
+import ssf.todo.util.Todoist;
 
 @Controller
-@RequestMapping(path = { "/", "task", "/index.html" })
+@RequestMapping(path = {"/", "/index.html"})
 public class IndexController {
 
     private final Logger logger = Logger.getLogger(IndexController.class.getName());
 
     @GetMapping(produces = { "text/html" })
     public String index(Model model) {
-        model.addAttribute("todoList", TodoList.getAll());
-        model.addAttribute("todo", TodoList.generateTodo());
-        return "index";
+        model.addAttribute("todoList", Todoist.getAll());
+        model.addAttribute("todo", Todoist.generateTodo());
+        return "tasks";
     }
 
     @PostMapping(produces = { "text/html" })
     public String addTask(@ModelAttribute Todo todo, Model model) {
-        TodoList.addTodo(todo);
+        Todoist.addTodo(todo);
         logger.log(Level.INFO, "Task >>>>> "+todo.getTask());
-        model.addAttribute("todoList", TodoList.getAll());
-        model.addAttribute("todo", TodoList.generateTodo());
-        return "index";
+        model.addAttribute("todoList", Todoist.getAll());
+        model.addAttribute("todo", Todoist.generateTodo());
+        return "tasks";
     }
 }
