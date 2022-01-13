@@ -14,35 +14,27 @@
         <div class="row mt-3">
             <div class="col">
                 <div class="d-flex justify-content-center">
-                    <h1 class="display-1">Things to do</h1>
+                    <h1 class="display-1">Do.</h1>
                 </div>
             </div>
         </div>
         <div class="row mt-3">
             <div class="col">
-                <form action="#" th:action="@{/tasks}" th:object="${todo}" method="post">
-                    <div class="input-group input-group-lg">
-                        <input type="text" class="form-control" th:field="*{task}">
-                        <button class="btn btn-info" type="submit">Add</button>
+                <div th:if="${#lists.isEmpty(usernames)}" class="d-flex justify-content-center">
+                    <h1 class="display-1">
+                        Nobody is home.
+                    </h1>
+                </div>
+                <div th:unless="${#lists.isEmpty(usernames)}" class="d-flex justify-content-center">
+                    <div class="list-group" th:each="user : ${usernames}">
+                        <!-- <button type="button" class="list-group-item list-group-item-action active" aria-current="true">The current button</button> -->
+                        <form actions="#" th:action="@{/task}" th:object="${user}" methods="post">
+                            <button type="submit" th:text="${user}" th:value="${user}" class="list-group-item list-group-item-action ">
+                            </button>
+                        </form>
                     </div>
-                </form>
+                </div>
             </div>
-        </div>
-
-        <br>
-        <div th:if="${#lists.isEmpty(todoList)}" class="d-flex justify-content-center">
-            <h1 class="display-1">
-                Nil, sine labore.
-            </h1>
-        </div>
-        <div th:unless="${#lists.isEmpty(todoList)}" class="d-flex justify-content-center">
-            <h1 class="display-6">
-                <ol>
-                    <span th:each="todo : ${todoList}">
-                <li th:text="${todo.task}"></li>
-            </span>
-                </ol>
-            </h1>
         </div>
     </div>
 </body>
