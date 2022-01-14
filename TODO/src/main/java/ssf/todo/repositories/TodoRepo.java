@@ -11,7 +11,7 @@ import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 
 import ssf.todo.model.Todo;
-import ssf.todo.util.Todoist;
+import ssf.todo.service.Taskmaster;
 
 @Service
 public class TodoRepo {
@@ -23,7 +23,7 @@ public class TodoRepo {
 
     public void save(final Todo todo) {
         // redisTemplate.opsForList().leftPush(TodoList.generateKey(), todo.getTask());
-        redisTemplate.opsForValue().set(TODO_ENTITY + Todoist.generateKey(), todo.getTask(), Duration.ofMinutes(5));
+        redisTemplate.opsForValue().set(TODO_ENTITY + Taskmaster.generateKey(), todo.getTask(), Duration.ofMinutes(5));
     }
 
     public Todo findById(final String contactId) {

@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import ssf.todo.model.Todo;
-import ssf.todo.util.Todoist;
+import ssf.todo.service.Taskmaster;
 
 @Controller
 @RequestMapping(path = {"/", "/index.html"})
@@ -16,8 +16,8 @@ public class IndexController {
 
     @GetMapping(produces = { "text/html" })
     public String index(Model model) {
-        Todoist.generateUsers();
-        model.addAttribute("usernames", Todoist.getUsernames());
+        Taskmaster.generateUsers();
+        model.addAttribute("usernames", Taskmaster.getUsernames());
         return "index";
     }
 

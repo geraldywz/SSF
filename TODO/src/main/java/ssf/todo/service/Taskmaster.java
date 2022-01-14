@@ -1,5 +1,6 @@
-package ssf.todo.util;
+package ssf.todo.service;
 
+import java.io.StringReader;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -8,23 +9,31 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Random;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Service;
 
+import jakarta.json.Json;
+import jakarta.json.JsonArray;
+import jakarta.json.JsonArrayBuilder;
+import jakarta.json.JsonObject;
 import ssf.todo.model.Task;
 import ssf.todo.model.Todo;
 import ssf.todo.model.User;
 
-public class Todoist {
+@Service
+public class Taskmaster {
     private static List<String> userList = new ArrayList<>();
-    private static final Logger logger = LoggerFactory.getLogger(Todoist.class);
+    private static final String USERNAME_KEY = "User name";
+    private static final String TODOLIST_KEY = "Todo list";
+    private static final String TASKNAME_KEY = "Task name";
+    private static final String COMPLETION_KEY = "Completion";
+    private static final Logger logger = LoggerFactory.getLogger(Taskmaster.class);
 
     public static User getUser(String name) {
         User userFound = null;
         for (String json : userList) {
-            User user = toUser(json).get();
+            User user = JSONToUser(json).get();
             if (name.equals(user.getName())) {
                 userFound = user;
                 break;
@@ -36,36 +45,65 @@ public class Todoist {
     public static List<String> getUsernames() {
         List<String> userNames = new ArrayList<>();
         for (String json : userList) {
-            User user = toUser(json).get();
+            User user = JSONToUser(json).get();
             userNames.add(user.getName());
         }
         return userNames;
     }
 
     public static void saveUser(User user) {
-        userList.add(toJSON(user).get());
+        userList.add(userToJSON(user).get().toString());
     }
 
-    private static Optional<String> toJSON(User user) {
-        ObjectMapper objectmapper = new ObjectMapper();
-        String jsonString = null;
-        try {
-            jsonString = objectmapper.writeValueAsString(user);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return Optional.of(jsonString);
+    private static Optional<JsonObject> taskToJSON(Task task) {
+
+        return Optional.of(
+                Json.createObjectBuilder()
+                        .add(TASKNAME_KEY, task.getName())
+                        .add(COMPLETION_KEY, task.getCompletion())
+                        .build());
     }
 
-    private static Optional<User> toUser(String json) {
-        ObjectMapper objectmapper = new ObjectMapper();
-        User user = null;
-        try {
-            user = objectmapper.readValue(json, User.class);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return Optional.of(user);
+    private static Optional<JsonObject> userToJSON(User user) {
+        JsonArrayBuilder arrayBuilder = Json.createArrayBuilder();
+        user.getTodoList()
+                .forEach(task -> {
+                    arrayBuilder.add(
+                            taskToJSON(task).get());
+                });
+
+        return Optional.of(
+                Json.createObjectBuilder()
+                        .add(USERNAME_KEY, user.getName())
+                        .add(TODOLIST_KEY, arrayBuilder.build())
+                        .build());
+    }
+
+    private static Optional<Task> JSONtoTask(String json) {
+        JsonObject taskObject = Json.createReader(
+                new StringReader(json))
+                .readObject();
+        return Optional.of(
+                new Task(
+                        taskObject.getString(TASKNAME_KEY).toString(),
+                        taskObject.getBoolean(COMPLETION_KEY)));
+    }
+
+    private static Optional<User> JSONToUser(String json) {
+        JsonObject userObject = Json.createReader(
+                new StringReader(json))
+                .readObject();
+        JsonArray jsonArray = userObject.getJsonArray(TODOLIST_KEY);
+
+        List<Task> todoList = new ArrayList<>();
+        jsonArray.forEach(task -> {
+            todoList.add(JSONtoTask(task.toString()).get());
+        });
+
+        return Optional.of(
+                new User(
+                        userObject.getString(USERNAME_KEY),
+                        todoList));
     }
 
     public static Task generateTask() {
@@ -110,7 +148,11 @@ public class Todoist {
                     tasks.add(generateTask());
                     taskIndex++;
                 }
-                String newUser = toJSON(new User(users.get(userIndex), tasks)).get();
+                String newUser = userToJSON(
+                        new User(
+                                users.get(userIndex),
+                                tasks)).get()
+                                        .toString();
                 logger.info("New user generated >>>>> " + newUser);
                 userList.add(newUser);
                 userIndex++;

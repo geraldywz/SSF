@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import ssf.todo.model.Todo;
-import ssf.todo.util.Todoist;
+import ssf.todo.service.Taskmaster;
 
 @Controller
 @RequestMapping(path = {"/task"})
@@ -21,17 +21,17 @@ public class TaskController {
 
     @GetMapping(produces = { "text/html" })
     public String index(Model model) {
-        model.addAttribute("todoList", Todoist.getAll());
-        model.addAttribute("todo", Todoist.generateTodo());
+        model.addAttribute("todoList", Taskmaster.getAll());
+        model.addAttribute("todo", Taskmaster.generateTodo());
         return "tasks";
     }
 
     @PostMapping(produces = { "text/html" })
     public String addTask(@ModelAttribute Todo todo, Model model) {
-        Todoist.addTodo(todo);
+        Taskmaster.addTodo(todo);
         logger.log(Level.INFO, "Task >>>>> "+todo.getTask());
-        model.addAttribute("todoList", Todoist.getAll());
-        model.addAttribute("todo", Todoist.generateTodo());
+        model.addAttribute("todoList", Taskmaster.getAll());
+        model.addAttribute("todo", Taskmaster.generateTodo());
         return "tasks";
     }
 }

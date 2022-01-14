@@ -3,44 +3,44 @@ package ssf.todo.model;
 import java.util.Objects;
 
 public class Task {
-    private String taskName;
-    private boolean completed;
+    private String name;
+    private boolean completion;
 
     public Task() {
     }
 
-    public Task(String taskName, boolean completed) {
-        this.taskName = taskName;
-        this.completed = completed;
+    public Task(String name, boolean completion) {
+        this.name = name;
+        this.completion = completion;
     }
 
-    public String getTaskName() {
-        return this.taskName;
+    public String getName() {
+        return this.name;
     }
 
-    public void setTaskName(String taskName) {
-        this.taskName = taskName;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public boolean isCompleted() {
-        return this.completed;
+    public boolean isCompletion() {
+        return this.completion;
     }
 
-    public boolean getCompleted() {
-        return this.completed;
+    public boolean getCompletion() {
+        return this.completion;
     }
 
-    public void setCompleted(boolean completed) {
-        this.completed = completed;
+    public void setCompletion(boolean completion) {
+        this.completion = completion;
     }
 
-    public Task taskName(String taskName) {
-        setTaskName(taskName);
+    public Task name(String name) {
+        setName(name);
         return this;
     }
 
-    public Task completed(boolean completed) {
-        setCompleted(completed);
+    public Task completion(boolean completion) {
+        setCompletion(completion);
         return this;
     }
 
@@ -52,19 +52,20 @@ public class Task {
             return false;
         }
         Task task = (Task) o;
-        return Objects.equals(taskName, task.taskName) && completed == task.completed;
+        return Objects.equals(name, task.name) && completion == task.completion;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(taskName, completed);
+        return Objects.hash(name, completion);
     }
 
     @Override
     public String toString() {
         return "{" +
-            " taskName='" + getTaskName() + "'" +
-            ", completed='" + isCompleted() + "'" +
-            "}";
+                " name='" + getName() + "'" +
+                ", completion='" + isCompletion() + "'" +
+                "}";
     }
+
 }

@@ -13,10 +13,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import jakarta.json.Json;
-import jakarta.json.JsonArray;
 import jakarta.json.JsonArrayBuilder;
 import jakarta.json.JsonObject;
-import jakarta.json.JsonObjectBuilder;
 import ssf.cookie.service.FortuneCookie;
 
 /*Sample REST*/
@@ -26,7 +24,7 @@ import ssf.cookie.service.FortuneCookie;
 public class CookieController {
 
     @Autowired
-    FortuneCookie service;
+    FortuneCookie cookieJar;
 
     @GetMapping
     public ResponseEntity<String> getCookies(@RequestParam(defaultValue = "1") Integer count) {
@@ -41,7 +39,7 @@ public class CookieController {
                     .status(HttpStatus.BAD_REQUEST)
                     .body(error.toString());
         } else {
-            List<String> cookies = service.getCookies(count);
+            List<String> cookies = cookieJar.getCookies(count);
 
             JsonArrayBuilder cookieBuilder = Json.createArrayBuilder();
             // 1. OG Function, a traditional For Loop
@@ -50,23 +48,23 @@ public class CookieController {
             // }
 
             // 2. Fancy For Loop, featuring Lambda Expression.
-            // cookies.stream()
-            // .forEach(v -> {
-            // cookieBuilder.add(v);
-            // });
+            cookies.stream()
+                    .forEach(v -> {
+                        cookieBuilder.add(v);
+                    });
 
             // 3. I have no idea what is going on here.
-            cookies.stream()
-                    .reduce(
-                            cookieBuilder, // identity
-                            (ab, item) -> ab.add(item), // accumulator
-                            (ab0, ab1) -> {
-                                JsonArray a = ab1.build();
-                                for (int i = 0; i < a.size(); i++) {
-                                    ab0.add(a.get(i));
-                                }
-                                return ab0;
-                            });
+            // cookies.stream()
+            // .reduce(
+            // cookieBuilder, // identity
+            // (ab, item) -> ab.add(item), // accumulator
+            // (ab0, ab1) -> {
+            // JsonArray a = ab1.build();
+            // for (int i = 0; i < a.size(); i++) {
+            // ab0.add(a.get(i));
+            // }
+            // return ab0;
+            // });
 
             JsonObject goodCookie = Json.createObjectBuilder()
                     .add("cookies", cookieBuilder.build())
