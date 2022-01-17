@@ -28,7 +28,6 @@ public class MarvelService {
     private final String publicKey;
 
     private final Charset UTF_8 = StandardCharsets.UTF_8;
-    private final String OUTPUT_FORMAT = "%-20s:%s";
 
     @Autowired
     private ApiService api;
