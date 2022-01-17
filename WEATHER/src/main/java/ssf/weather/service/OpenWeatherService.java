@@ -28,14 +28,12 @@ public class OpenWeatherService implements WeatherService {
     private ApiService api;
 
     public OpenWeatherService() {
-        String k = KEY_OPENWEATHERMAP;
-        if ((null != k) && (k.trim().length() > 0)) {
-            appId = k;
-            logger.info("OPENWEATHERMAP_KEY set");
+        if (System.getenv(ENV_OPENWEATHERMAP_KEY) == null || System.getenv(ENV_OPENWEATHERMAP_KEY).length() == 0) {
+            appId = KEY_OPENWEATHERMAP;
         } else {
-            appId = "Ipsum Lorem";
-            logger.warn("OPENWEATHERMAP_KET not set");
+            appId = System.getenv(ENV_OPENWEATHERMAP_KEY);
         }
+        logger.info("OWM KEY >>>>> " + appId);
     }
 
     public List<Weather> getWeather(String city) {
