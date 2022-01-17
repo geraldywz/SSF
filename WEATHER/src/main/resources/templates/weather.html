@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>New World</title>
+    <link rel="stylesheet" href="bootstrap.min.css">
+</head>
+
+<body>
+    <div classs="container">
+        <div class="row mt-3">
+            <div class="col">
+                <div class="col d-flex justify-content-center mt-5">
+                    <h2 class="display-1">Weather Service</h1>
+                </div>
+            </div>
+        </div>
+        <div class="row mt-3">
+            <div class="col">
+                <form method="post" action="/weather">
+                    <input type="hidden" name="history" th:value="${history}">
+                    <div class="input-group input-group-lg">
+                        <input type="text" name="city" th:value="${city}" placeholder="Enter city here." class="form-control">
+                        <button class="btn btn-info" type="submit">Get</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <div th:if="${#lists.isEmpty(contents)}">
+        </div>
+        <div class="row" th:unless="${#lists.isEmpty(contents)}" th:each="w : ${contents}">
+            <div class="col-2">
+                <img th:src="${w.icon}" class="img-thumbnail">
+            </div>
+            <div class="col-8">
+                <table class="table table-hover">
+                    <tr>
+                        <td>City</td>
+                        <td>
+                            <!-- <strong th:text="${w.cityName}"></strong>, -->
+                            <span th:text="${w.cityName}"></span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Description</td>
+                        <td>
+                            <strong th:text="${w.main}"></strong>,
+                            <span th:text="${w.description}"></span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Temperature</td>
+                        <td>
+                            <span th:text="${w.temperature}"></span>C
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

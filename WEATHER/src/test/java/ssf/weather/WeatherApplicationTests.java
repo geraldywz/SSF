@@ -1,10 +1,10 @@
-package ssf.todo;
+package ssf.weather;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class TodoApplicationTests {
+class WeatherApplicationTests {
 
 	@Test
 	void contextLoads() {
