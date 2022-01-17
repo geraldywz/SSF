@@ -19,12 +19,15 @@ public class Main {
 	public static void main(String[] args) {
 		SpringApplication app = new SpringApplication(Main.class);
 		logger.info("ARGS Length >>>>> " + args.length);
+
 		JsonObject argsObj = ArgsParser.parse(args);
 		logger.info("ARGS Parsed >>>>> " + argsObj.toString());
+
 		if (argsObj.containsKey(ArgsParser.ARGS_PORT)) {
 			app.setDefaultProperties(
 					Collections.singletonMap("server.port", argsObj.getString(ArgsParser.ARGS_PORT)));
 		}
+		
 		app.run(args);
 	}
 }

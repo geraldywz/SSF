@@ -42,11 +42,11 @@ public class Weather {
     }
 
     public String getIcon() {
-        return this.icon;
+        return "http://openweathermap.org/img/wn/%s@2x.png".formatted(icon);
     }
 
     public void setIcon(String icon) {
-        this.icon = "http://openweathermap.org/img/wn/%s@2x.png".formatted(icon);
+        this.icon = icon;
     }
 
     public Float getTemperature() {
@@ -78,6 +78,12 @@ public class Weather {
         w.setMain(o.getString("main"));
         w.setDescription(o.getString("description"));
         w.setIcon(o.getString("icon"));
+        if (o.containsKey("cityName"))
+            w.setCityName(o.getString("cityName"));
+        if (o.containsKey("temperature")) {
+            double temp = o.getJsonNumber("temperature").doubleValue();
+            w.setTemperature((float) temp);
+        }
         return w;
     }
 
@@ -94,7 +100,8 @@ public class Weather {
 
     @Override
     public String toString() {
-        return this.toJson().toString();
+        return "cityName: %s, main: %s, description: %s, icon: %s, temperature: %f"
+                .formatted(cityName, main, description, icon, temperature);
     }
 
     public JsonObject toJson() {
@@ -106,4 +113,5 @@ public class Weather {
                 .add("temperature", temperature)
                 .build();
     }
+
 }

@@ -3,6 +3,7 @@ package ssf.weather.controller;
 // import org.slf4j.Logger;
 // import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -15,14 +16,18 @@ import org.springframework.web.bind.annotation.RestController;
 import jakarta.json.Json;
 import ssf.weather.service.WeatherService;
 
+import static ssf.weather.util.Constants.*;
+
 @RestController
 @RequestMapping(path = "/weather", produces = MediaType.APPLICATION_JSON_VALUE)
 public class WeatherRestController {
 
     @Autowired
+    @Qualifier(BEAN_FETCH_WEATHER_SERVICE)
     WeatherService weatherSvc;
 
-    // private static final Logger logger = LoggerFactory.getLogger(WeatherController.class);
+    // private static final Logger logger =
+    // LoggerFactory.getLogger(WeatherController.class);
 
     @GetMapping
     public ResponseEntity<String> getWeatherByRequestParam(@RequestParam(defaultValue = "Singapore") String city) {

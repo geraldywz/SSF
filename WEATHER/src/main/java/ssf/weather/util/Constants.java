@@ -10,7 +10,9 @@ public class Constants {
     public static String KEY_OPENWEATHERMAP;
     public static String KEY_REDISPASSWORD;
 
-    public static final String BEAN_WEATHER_CACHE = "weather_cache";
+    public static final String BEAN_FETCH_WEATHER_SERVICE = "FETCH_WEATHER_SERVICE";
+    public static final String BEAN_WEATHER_SERVICE = "WEATHER_SERVICE";
+    public static final String BEAN_WEATHER_CACHE = "WEATHER_CACHE";
 
     public static final String DEFAULT_PORT = "8080";
 
