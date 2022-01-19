@@ -48,7 +48,7 @@ public class WeatherRecord {
                 "Singapore",
                 "Hong Kong",
                 "New York",
-                "Bankgkok",
+                "Nepal",
                 "Sydney",
                 "Melbourne",
                 "Taipei",

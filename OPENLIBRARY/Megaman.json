@@ -1,0 +1,115 @@
+{
+	"numFound": 43,
+	"start": 0,
+	"numFoundExact": true,
+	"docs": [
+		{
+			"key": "/works/OL5742316W",
+			"type": "work",
+			"seed": [
+				"/books/OL17920786M",
+				"/works/OL5742316W",
+				"/authors/OL1396264A"
+			],
+			"title": "Megaman X7",
+			"title_suggest": "Megaman X7",
+			"has_fulltext": false,
+			"edition_count": 1,
+			"edition_key": [
+				"OL17920786M"
+			],
+			"publish_date": [
+				"2004"
+			],
+			"publish_year": [
+				2004
+			],
+			"first_publish_year": 2004,
+			"number_of_pages_median": 111,
+			"lccn": [
+				"2003112432"
+			],
+			"publish_place": [
+				"Indianapolis, Ind"
+			],
+			"isbn": [
+				"9780744003055",
+				"0744003059"
+			],
+			"last_modified_i": 1607403483,
+			"ebook_count_i": 0,
+			"publisher": [
+				"BradyGames"
+			],
+			"language": [
+				"eng"
+			],
+			"author_key": [
+				"OL1396264A"
+			],
+			"author_name": [
+				"Greg Sepelak"
+			],
+			"id_goodreads": [
+				"4165272"
+			],
+			"publisher_facet": [
+				"BradyGames"
+			],
+			"_version_": 1715093753295798273,
+			"author_facet": [
+				"OL1396264A Greg Sepelak"
+			]
+		},
+		{
+			"key": "/works/OL26077175W",
+			"type": "work",
+			"seed": [
+				"/books/OL35194156M",
+				"/works/OL26077175W",
+				"/authors/OL9810427A"
+			],
+			"title": "Megaman Coloring Book",
+			"title_suggest": "Megaman Coloring Book",
+			"has_fulltext": false,
+			"edition_count": 1,
+			"edition_key": [
+				"OL35194156M"
+			],
+			"publish_date": [
+				"2021"
+			],
+			"publish_year": [
+				2021
+			],
+			"first_publish_year": 2021,
+			"isbn": [
+				"9798530830693"
+			],
+			"last_modified_i": 1633914300,
+			"ebook_count_i": 0,
+			"publisher": [
+				"Independently Published"
+			],
+			"language": [
+				"eng"
+			],
+			"author_key": [
+				"OL9810427A"
+			],
+			"author_name": [
+				"Thomas Thomas Wyatt"
+			],
+			"publisher_facet": [
+				"Independently Published"
+			],
+			"_version_": 1715089809578393600,
+			"author_facet": [
+				"OL9810427A Thomas Thomas Wyatt"
+			]
+		}
+	],
+	"num_found": 43,
+	"q": "Megaman",
+	"offset": null
+}

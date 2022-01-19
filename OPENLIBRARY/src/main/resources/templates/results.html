@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Results</title>
+    <link rel="stylesheet" href="bootstrap.min.css">
+</head>
+
+<body>
+    <div class="container">
+        <div class="row mt-3" th:if="${#lists.isEmpty(books)}">
+            <div class="col d-flex justify-content-center mt-5">
+                <h2 class="display-1">No books found for '<span th:text=${title}></span>'</h2>
+            </div>
+        </div>
+        <div class="row mt-3" th:unless="${#lists.isEmpty(books)}">
+            <div class="col d-flex justify-content-center mt-5">
+                <h2 class="display-1">
+                    Search result for '<span th:text=${title}></span>'
+                </h2>
+            </div>
+        </div>
+        <div class="row mt-3" th:unless="${#lists.isEmpty(books)}">
+            <div class="col">
+                <ol>
+                    <span th:each="b : ${books}">
+                        <a th:href="@{${url}+${b.key}}">
+                        <li th:text="${b.title}"></li>
+                        </a>
+                </span>
+                </ol>
+                <p>more results, not shown</p>
+                <p><a href="/">Back</a></p>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
