@@ -1,6 +1,5 @@
 package ssf.openlibrary.service;
 
-import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -44,7 +43,7 @@ public class LibraryService implements BookService {
             Book b = delegate.getBook(key);
             cache.save(b);
             b.setCached(false);
-            
+
             return b;
         }
     }
